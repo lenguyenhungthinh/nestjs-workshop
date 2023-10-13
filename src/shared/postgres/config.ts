@@ -1,4 +1,5 @@
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
+import { DataSource } from 'typeorm';
 
 export function optionsFactory(): TypeOrmModuleOptions {
   return {
@@ -7,7 +8,7 @@ export function optionsFactory(): TypeOrmModuleOptions {
     port: 54321,
     username: 'postgres',
     password: '123456',
-    database: 'postgres',
+    database: 'postgres2',
     schema: 'public',
     entities: [__dirname + '/schema/*{.ts,.js}'],
     synchronize: false,
@@ -19,3 +20,19 @@ export function optionsFactory(): TypeOrmModuleOptions {
     poolSize: 10,
   };
 }
+
+// For cli migration
+export const AppDataSource = new DataSource({
+  type: 'postgres',
+  host: 'localhost',
+  port: 54321,
+  username: 'postgres',
+  password: '123456',
+  database: 'postgres2',
+  schema: 'public',
+  entities: [__dirname + '/schema/*.ts'],
+  synchronize: false,
+  migrationsRun: false,
+  migrationsTableName: 'migrations',
+  migrations: [__dirname + '/migration/*{.ts,.js}'],
+});
