@@ -1,9 +1,12 @@
 import { Module } from '@nestjs/common';
-import { BooksController } from './books.controller';
+import { BookController } from './books.controller';
 import { BooksService } from './books.service';
+import { RepositoryModule } from 'src/shared/domain/repository/repository.module';
+import { PostgresModule } from 'src/shared/postgres/postgres.module';
 
 @Module({
-  controllers: [BooksController],
+  imports: [RepositoryModule, PostgresModule],
+  controllers: [BookController],
   providers: [BooksService],
 })
 export class BooksModule {}

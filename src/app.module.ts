@@ -3,7 +3,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { BooksModule } from './books/books.module';
 import { PublishersModule } from './publishers/publishers.module';
-import { AuthMiddleware } from './shared/middleware/auth.middleware';
+import { AuthMiddleware } from './shared/middleware/auth.middeware';
 
 @Module({
   imports: [BooksModule, PublishersModule],
