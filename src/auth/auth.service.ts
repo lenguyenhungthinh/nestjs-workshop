@@ -24,6 +24,7 @@ export class AuthService {
       new LoginUser({
         email: details.email,
         displayName: details.displayName,
+        isValid: true,
       }),
     );
     return newUser;

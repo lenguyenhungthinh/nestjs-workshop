@@ -4,7 +4,7 @@ import { Profile, Strategy } from 'passport-google-oauth20';
 import { AuthService } from '../auth.service';
 
 @Injectable()
-export class GoogleStrategy extends PassportStrategy(Strategy) {
+export class GoogleStrategy extends PassportStrategy(Strategy, 'google') {
   constructor(
     @Inject('AUTH_SERVICE') private readonly authService: AuthService,
   ) {
@@ -17,7 +17,12 @@ export class GoogleStrategy extends PassportStrategy(Strategy) {
     });
   }
 
-  async validate(accessToken: string, refreshToken: string, profile: Profile) {
+  async validate(
+    accessToken: string,
+    refreshToken: string,
+    profile: Profile,
+    done: any,
+  ) {
     console.log(accessToken);
     console.log(refreshToken);
     console.log(profile);
@@ -27,6 +32,6 @@ export class GoogleStrategy extends PassportStrategy(Strategy) {
     });
     console.log('Validate');
     console.log(user);
-    return user || null;
+    done(null, user);
   }
 }

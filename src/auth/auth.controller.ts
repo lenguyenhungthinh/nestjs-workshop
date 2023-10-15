@@ -1,11 +1,12 @@
 import { Controller, Get, Req, UseGuards } from '@nestjs/common';
-import { GoogleAuthGuard } from './strategies/google.guard';
+// import { GoogleAuthGuard } from './strategies/google.guard';
 import { Request } from 'express';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller('auth')
 export class AuthController {
   @Get('google/login')
-  @UseGuards(GoogleAuthGuard)
+  @UseGuards(AuthGuard('google'))
   async handleGoogleLogin() {
     return {
       message: 'This action will return google login url',
@@ -13,6 +14,7 @@ export class AuthController {
   }
 
   @Get('google/redirect')
+  @UseGuards(AuthGuard('google'))
   handleGoogleRedirect() {
     console.log('Redirect');
     return { message: 'OK' };
